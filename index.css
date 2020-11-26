@@ -1,0 +1,22 @@
+header{
+    background-image: url(ressources/girl-vr.jpeg);
+    background-size: cover;
+    min-height: 100vh;
+}
+
+@media screen and (max-width: 670px) {
+    header {
+      min-height: 300px;
+    }
+  }
+
+  #services {
+    padding-top: 4vw;
+    padding-bottom: 4vw;
+  }
+
+  #cards{
+    padding-top: 4vw;
+    padding-bottom: 4vw;
+  }
+
