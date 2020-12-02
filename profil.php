@@ -1,10 +1,16 @@
-<?php 
+<?php
+session_start();
 
 require_once 'libraries/function.php';
 require_once 'libraries/database.php';
 
+if(isset($_SESSION['id'])) { 
+  $bdd = getPdo(); 
+  $requser = $bdd->prepare("SELECT * FROM utilisateurs WHERE id = ?");
+  $requser->execute(array($_SESSION['id']));
+  $user = $requser->fetch();
 
-if (isset($_POST["submit"])){
+if(isset($_POST['submit'])){
 
   $login = $_POST["login"];
   $password = $_POST["password"];
@@ -16,24 +22,26 @@ if (isset($_POST["submit"])){
 
   if(check_empty($login, $password, $password2) == 1){
     if(check_password($password, $password2) == 1 AND check_login($login) == 1){
-      insert_bdd($loginHash, $passwordHash);
+      update_data($loginHash, $passwordHash);
+      header("Location: profil.php?id=".$_SESSION['id']);
 
     }
     else{
-      echo check_password($password, $password2);
-      echo check_login($login);
+      $msg = check_password($password, $password2);
+      $msg = check_login($login);
     }
   }
   else{
-    echo check_empty($login, $password, $password2);
+    $msg = check_empty($login, $password, $password2);
   }
+
+
+  } 
 
 }
 
+?>
 
-
-
-  ?>
 
 <html lang="en">
 
@@ -50,18 +58,16 @@ if (isset($_POST["submit"])){
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 
-    <title>Inscription Brain Tech</title>
+    <title>Profile Brain Tech</title>
 </head>
 
 <style>
 header{
-    background-image: linear-gradient(to bottom, #5b886c, #679879, #73a786, #7fb893, #8cc8a0);
-}
+    background-image: linear-gradient(to bottom, #d07d15, #d6831b, #dc8921, #e39027, #e9962c);}
 
 .responsive-img{
-    width: 50%; 
+    width: 70%; 
 }
-
 </style>
 
 <body>
@@ -74,50 +80,50 @@ header{
 
 <section class="section container-fluid scrollspy" id="contact">
             <div class="row ">
-            <div class="col s12 l5 offset-l1">
-        <h2 class="center-align green-text text-darken-4">Join us ! </h2>
-        <p class="center-align">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam atque, rem minus eius suscipit nostrum,
-          aliquam impedit ab harum voluptates accusamus illum totam. Libero vel dignissimos, suscipit excepturi atque
-          natus?<br>
-          <img src="ressources/logo.png" class="responsive-img"></p>
-      
-      </div>
-              <div class="col s12 l4 offset-l1">
-                <h2 class="flow-text green-text text-darken-4">Registration</h2><br>
 
-                <form action="inscription.php" method="POST" >
+              <div class="col s12 l4 offset-l1">
+              <h2 class=" orange-text text-darken-4">Hello <?php echo $user['login']; ?></h2>
+                <h2 class="flow-text orange-text text-darken-4">Edit Your Profile</h2><br>
+                <?php if (isset($msg)){
+                echo $msg;
+              } ?>
+                <form action="profil.php" method="POST" >
                   <div class="input-field">
                     <i class="material-icons grey-text text-darken-4 prefix">account_circle</i>
                     <input type="text" id="login" name="login">
-                    <label class="grey-text" for="login">Login</label>
+                    <label class="grey-text" for="login" name="newlogin">Login</label>
                   </div>
                   <div class="input-field">
                     <i class="material-icons grey-text text-darken-4 prefix">lock</i>
                     <input type="password" id="password" name="password">
-                    <label class="grey-text" for="password">Password</label>
+                    <label class="grey-text" for="password" >Password</label>
                   </div>
                   <div class="input-field">
                     <i class="material-icons grey-text text-darken-4 prefix">lock</i>
                     <input type="password" id="password2" name="password2">
-                    <label class="grey-text" for="password2">Confirmation Password</label>
-
-                     <?php 
-                    if(isset($msg_password)){
-                      echo $msg_password;
-                    }
-                    if(isset($msg_login)){
-                      echo $msg_login;
-                    }
-                    ?>
-
+                    <label class="grey-text" for="password2" >Confirmation Password</label>
                   </div><br>
                 
                   <div class="input-field center">
-                    <button name="submit" class="btn waves-effect waves-light green"><i class="material-icons left">add</i>REGISTER</button>
+                    <button name="submit" class="btn waves-effect waves-light orange lighten-2">EDIT</button>
                   </div>
                 </form>
+
+
+              
               </div>
+
+
+
+              <div class="col s12 l5 offset-l1">
+        <div class="center-align">
+          <img src="ressources/girl-vr1.jpeg" class="responsive-img"></p>
+</div>
+      </div>
+
             </div>
+
+
         
           </section>
 

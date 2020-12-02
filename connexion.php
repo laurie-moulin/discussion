@@ -1,3 +1,34 @@
+<?php 
+session_start();
+
+require_once 'libraries/function.php';
+require_once 'libraries/database.php';
+
+
+if(isset($_POST['submit'])){
+  $login = htmlspecialchars($_POST['login']);
+  $password = sha1($_POST['password']);
+
+  if(check_empty_connect($login, $password) == 1){
+
+    if(connexion($login, $password) == 1){
+
+    }
+    else{
+      echo connexion($login, $password);   
+    }
+  }
+  else{
+    echo check_empty_connect($login, $password);
+    echo var_dump(check_empty_connect($login, $password));
+  }
+}
+
+  ?>
+
+
+
+
 <html lang="en">
 
 <head>
@@ -40,21 +71,20 @@ header{
               <div class="col s12 l4 offset-l4">
                 <h2 class="flow-text indigo-text text-darken-4">Log In To Your Account</h2><br>
 
-                <form action="" >
+                <form action="connexion.php" method="POST" >
                   <div class="input-field">
                     <i class="material-icons grey-text text-darken-4 prefix">account_circle</i>
                     <input type="text" id="login" name="login">
                     <label class="grey-text" for="login">Login</label>
                   </div>
-                  <div class="input-field">
-                    <i class="material-icons grey-text text-darken-4 prefix">lock</i>
+                  <div class="input-field">                    <i class="material-icons grey-text text-darken-4 prefix">lock</i>
                     <input type="password" id="password" name="password">
                     <label class="grey-text" for="password">Password</label>
                   </div><br>
 
                 
                   <div class="input-field center">
-                    <button class="btn waves-effect waves-light blue lighten-2">Log In</button>
+                    <button class="btn waves-effect waves-light blue lighten-2" name="submit">Log In</button>
                   </div>
                 </form>
               </div>
