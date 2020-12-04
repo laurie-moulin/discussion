@@ -15,12 +15,11 @@ if(isset($_POST['submit'])){
 
     }
     else{
-      echo connexion($login, $password);   
+      $msg = connexion($login, $password);   
     }
   }
   else{
-    echo check_empty_connect($login, $password);
-    echo var_dump(check_empty_connect($login, $password));
+    $msg = check_empty_connect($login, $password);
   }
 }
 
@@ -81,7 +80,12 @@ header{
                     <input type="password" id="password" name="password">
                     <label class="grey-text" for="password">Password</label>
                   </div><br>
-
+                  
+                  <?php 
+                    if(isset($msg)){
+                      echo $msg;
+                    }
+                    ?>
                 
                   <div class="input-field center">
                     <button class="btn waves-effect waves-light blue lighten-2" name="submit">Log In</button>

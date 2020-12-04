@@ -104,4 +104,30 @@ function connexion($login, $password){
 
 }
 
+function display_msg($data){
+
+  select_msg();
+
+while ($result = $data-> fetch(PDO::FETCH_ASSOC)){
+  if ($i == 0){
+    foreach ($result as $key => $value){
+      echo "<p>$key</p>";
+    }
+    $i++;
+  }
+  foreach ($result as $key => $value) {
+    if ($key == "posté le jour/mois/année"){
+      date_default_timezone_set('Europe/Paris');
+      $value =  date("d-m-Y", strtotime($value));  ;
+    echo "<p>$value</p>";
+    }
+    else
+      echo "<p>" .nl2br($value). "</p>";
+  }
+}
+
+return $result;
+
+}
+
 ?>

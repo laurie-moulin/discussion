@@ -14,26 +14,27 @@ if (isset($_POST["submit"])){
   $passwordHash = sha1($password);
   $passwordHash2 = sha1($password2);
 
-  if(check_empty($login, $password, $password2) == 1){
-    if(check_password($password, $password2) == 1 AND check_login($login) == 1){
-      insert_bdd($loginHash, $passwordHash);
 
+  if(check_empty($login, $password, $password2) == 1){
+    if(check_login($login) == 1){
+      if(check_password($password, $password2) == 1){
+        insert_bdd($loginHash, $passwordHash);
+      }
+      else{
+        $msg = check_password($password, $password2);
+      }
     }
     else{
-      echo check_password($password, $password2);
-      echo check_login($login);
+      $msg = check_login($login);
     }
   }
   else{
-    echo check_empty($login, $password, $password2);
+    $msg = check_empty($login, $password, $password2);
   }
 
 }
 
-
-
-
-  ?>
+?>
 
 <html lang="en">
 
@@ -102,11 +103,8 @@ header{
                     <label class="grey-text" for="password2">Confirmation Password</label>
 
                      <?php 
-                    if(isset($msg_password)){
-                      echo $msg_password;
-                    }
-                    if(isset($msg_login)){
-                      echo $msg_login;
+                    if(isset($msg)){
+                      echo $msg;
                     }
                     ?>
 

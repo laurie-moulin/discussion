@@ -84,9 +84,7 @@ header{
               <div class="col s12 l4 offset-l1">
               <h2 class=" orange-text text-darken-4">Hello <?php echo $user['login']; ?></h2>
                 <h2 class="flow-text orange-text text-darken-4">Edit Your Profile</h2><br>
-                <?php if (isset($msg)){
-                echo $msg;
-              } ?>
+
                 <form action="profil.php" method="POST" >
                   <div class="input-field">
                     <i class="material-icons grey-text text-darken-4 prefix">account_circle</i>
@@ -103,6 +101,10 @@ header{
                     <input type="password" id="password2" name="password2">
                     <label class="grey-text" for="password2" >Confirmation Password</label>
                   </div><br>
+
+                  <?php if (isset($msg)){
+                echo $msg;
+              } ?>
                 
                   <div class="input-field center">
                     <button name="submit" class="btn waves-effect waves-light orange lighten-2">EDIT</button>

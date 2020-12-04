@@ -36,12 +36,32 @@ function check_loginexist($loginHash){
 
 }
 
+//UPDATE DONNEE EN BDD PROFIL
+
 function update_data($loginHash, $passwordHash){
     $bdd = getPdo();
     $insertmdp = $bdd->prepare("UPDATE utilisateurs SET login = ? , password = ? WHERE id = ?");
     $insertmdp->execute(array($loginHash, $passwordHash, $_SESSION['id'])); 
 
 }
+
+//INSERER COMMENTAIRE EN BDD
+
+
+function com_insert($message,$date){
+    $bdd = getPdo();
+    date_default_timezone_set('Europe/Paris');
+    $date = date('Y-m-d H:i:s');
+    $insertcomm = $bdd->prepare("INSERT INTO messages(message, id_utilisateur, date) VALUES(?, ?, ?)");
+    $insertcomm->execute(array($message, $_SESSION['id'], $date));
+    header("location:discussion.php");
+
+return $insertcomm;
+}
+
+?>
+
+
 
 
 

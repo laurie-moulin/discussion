@@ -1,9 +1,14 @@
        <!-- Dropdown Structure -->
        <ul id="dropdown1" class="dropdown-content ">
+       <?php if (isset($_SESSION['id'] )) {?> 
+         <li><a class="orange-text" href="profil.php?id=" <?php $_SESSION['id'] ?> >Profil</a></li>
+         <li><a class="orange-text" href="deconnexion.php" >Deconnexion</a></li>
+          <?php }  else { ?>
             <li><a class="orange-text" href="inscription.php">Inscription</a></li>
             <li><a class="orange-text" href="connexion.php">Connexion</a></li>
+          <?php } ?>
             <li class="divider"></li>
-            <li><a class="orange-text" href="#!">Discussion</a></li>
+            <li><a class="orange-text" href="discussion.php">Discussion</a></li>
         </ul>
 
         <nav class="nav-wrapper transparent">
