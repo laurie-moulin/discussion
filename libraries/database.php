@@ -6,7 +6,7 @@ require_once 'libraries/function.php';
 
 function getPdo() : PDO
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=discussion', 'root', 'root' );
+    $bdd = new PDO('mysql:host=localhost;dbname=discussion', 'root', '' );
     return $bdd;
 }
 

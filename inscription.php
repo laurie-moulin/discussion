@@ -19,6 +19,7 @@ if (isset($_POST["submit"])){
     if(check_login($login) == 1){
       if(check_password($password, $password2) == 1){
         insert_bdd($loginHash, $passwordHash);
+        header("location:connexion.php");
       }
       else{
         $msg = check_password($password, $password2);
