@@ -54,7 +54,6 @@ function check_login($login){
     elseif(check_loginexist($loginHash) == 1){
         $msg = "Le login existe déjà";
     }
-
     else{
         return 1;
     }

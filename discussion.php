@@ -68,9 +68,7 @@ $result = $data->fetchAll(PDO::FETCH_ASSOC);
           }
           ?>
           </div>
-        <!-- </div> -->
 
-        <!-- <div class="col s12 l6 offset-l4"> -->
           <form action="discussion.php" method="POST">
             <div class="input-field">
               <textarea name="message" class="materialize-textarea" rows="5" cols="33" required></textarea>

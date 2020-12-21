@@ -1,4 +1,4 @@
-header{
+header {
     background-image: url(ressources/girl-vr.jpeg);
     background-size: cover;
     min-height: 100vh;
@@ -6,17 +6,17 @@ header{
 
 @media screen and (max-width: 670px) {
     header {
-      min-height: 300px;
+        min-height: 300px;
     }
-  }
+}
 
-  #services {
+#services {
     padding-top: 4vw;
     padding-bottom: 4vw;
-  }
+}
 
-  #cards{
+#cards {
     padding-top: 4vw;
     padding-bottom: 4vw;
-  }
-
+    background-color: rgba(128, 128, 128, 0.507);
+}

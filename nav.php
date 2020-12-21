@@ -1,3 +1,8 @@
+<?php 
+
+
+?>
+       
        <!-- Dropdown Structure -->
        <ul id="dropdown1" class="dropdown-content ">
        <?php if (isset($_SESSION['id'] )) {?> 
